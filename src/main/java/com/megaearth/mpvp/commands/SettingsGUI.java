@@ -1,5 +1,6 @@
-package com.megaearth.mpvp;
+package com.megaearth.mpvp.commands;
 
+import com.megaearth.mpvp.MPVP;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,18 +11,18 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 
-public class PlayCommand implements CommandExecutor{
+public class SettingsGUI implements CommandExecutor{
 
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("play")) {
+        if (command.getName().equalsIgnoreCase("settings")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage("You must be a player to use this command!");
                 return true;
             }
             Player player = (Player) sender;
-            Inventory gui = Bukkit.createInventory(player, 9 * 3, "Select a Game");
-            gui.setItem(0, new ItemStack(Material.DIAMOND_CHESTPLATE));
+            Inventory gui = Bukkit.createInventory(player, 9 * 3, "Settings");
+            gui.setItem(0, new ItemStack(Material.DIAMOND_SWORD));
             player.openInventory(gui);
             player.setMetadata("OpenedMenu", new FixedMetadataValue(plugin, true));
         }
