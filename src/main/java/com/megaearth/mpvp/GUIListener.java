@@ -22,6 +22,9 @@ public class GUIListener implements Listener {
                     case DIAMOND_SWORD:
                         player.sendMessage("You clicked on the diamond sword!");
                         break;
+                    case DIAMOND_CHESTPLATE:
+                        player.sendMessage("You clicked on the diamond chestplate!");
+                        break;
                     default:
                         break;
                 }

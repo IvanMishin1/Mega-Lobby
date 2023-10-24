@@ -11,6 +11,7 @@ public final class MPVP extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         Objects.requireNonNull(this.getCommand("settings")).setExecutor((CommandExecutor) new SettingsCommand());
+        Objects.requireNonNull(this.getCommand("play")).setExecutor((CommandExecutor) new PlayCommand());
         this.getServer().getPluginManager().registerEvents(new GUIListener(), this);
         getLogger().info("MPVP has been enabled!");
 
