@@ -1,0 +1,12 @@
+name: MPVP
+version: '${project.version}'
+main: com.megaearth.mpvp.MPVP
+api-version: '1.20'
+commands:
+    settings:
+        description: MPVP gui command
+        usage: /<command>
+        aliases: []
+        permission: mpvp.gui
+        permission-message: You don't have permission to use this command.
+        executor: com.megaearth.mpvp.commands.GUICommand
