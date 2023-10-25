@@ -1,5 +1,4 @@
 package com.megaearth.mpvp.commands;
-
 import com.megaearth.mpvp.MPVP;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,10 +9,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
+import com.megaearth.mpvp.Matchmaking;
 
-public class PlayGUI implements CommandExecutor{
+public class PlayGUI implements CommandExecutor {
 
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
+    Matchmaking matchmaking = new Matchmaking();
+
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("play")) {
             if (!(sender instanceof Player)) {
@@ -22,7 +25,10 @@ public class PlayGUI implements CommandExecutor{
             }
             Player player = (Player) sender;
             Inventory gui = Bukkit.createInventory(player, 9 * 3, "Select a Game");
-            gui.setItem(0, new ItemStack(Material.DIAMOND_CHESTPLATE));
+            gui.setItem(10, new ItemStack(Material.DIAMOND_SWORD));
+            gui.setItem(12, new ItemStack(Material.TNT));
+            gui.setItem(14, new ItemStack(Material.GRASS_BLOCK));
+            gui.setItem(16, new ItemStack(Material.RED_BED));
             player.openInventory(gui);
             player.setMetadata("OpenedMenu", new FixedMetadataValue(plugin, true));
         }
