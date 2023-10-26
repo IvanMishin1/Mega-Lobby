@@ -1,18 +1,25 @@
 package com.megaearth.mpvp;
 import com.megaearth.mpvp.commands.PlayGUI;
-import com.megaearth.mpvp.commands.SettingsGUI;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.util.Objects;
+import com.megaearth.mpvp.queue.*;
 
 public final class MPVP extends JavaPlugin {
 
+    private QueueManager queueManager;
+
     @Override
     public void onEnable() {
+        queueManager = new QueueManager();
         // Plugin startup logic
         this.getCommand("play").setExecutor(new PlayGUI());
-        this.getCommand("settings").setExecutor(new SettingsGUI());
+        this.getCommand("queue").setExecutor(new QueueCommandExecutor(queueManager));
+
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(queueManager), this);
+
+        queueManager.createQueue("Game1");
+        queueManager.createQueue("Game2");
+
         getLogger().info("MPVP has been enabled!");
     }
 

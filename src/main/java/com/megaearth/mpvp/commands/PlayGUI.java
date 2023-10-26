@@ -9,12 +9,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
-import com.megaearth.mpvp.Matchmaking;
 
 public class PlayGUI implements CommandExecutor {
 
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
-    Matchmaking matchmaking = new Matchmaking();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

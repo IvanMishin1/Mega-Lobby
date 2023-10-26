@@ -6,11 +6,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import java.util.Objects;
-
+import com.megaearth.mpvp.queue.*;
 public class GUIMetaListener implements Listener {
 
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
-    Matchmaking matchmaking = new Matchmaking();
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -19,16 +18,11 @@ public class GUIMetaListener implements Listener {
             if (player.hasMetadata("OpenedMenu")) {
                 event.setCancelled(true);
                 if (Objects.requireNonNull(event.getCurrentItem()).getType().equals(Material.DIAMOND_SWORD)) {
-                    matchmaking.addPlayerToQueue(player);
                     event.getWhoClicked().closeInventory();
                 }
-                if (Objects.requireNonNull(event.getCurrentItem()).getType().equals(Material.BARRIER)) {
-                    matchmaking.removePlayerFromQueue(player);
-                    event.getWhoClicked().closeInventory();
-                }
+            }
         }
     }
-}
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
