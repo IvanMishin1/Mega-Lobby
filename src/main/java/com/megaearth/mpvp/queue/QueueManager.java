@@ -9,24 +9,12 @@ public class QueueManager {
     public QueueManager() {
         this.queues = new HashMap<>();
     }
-
     public void createQueue(String gameName) {
         if (!queues.containsKey(gameName)) {
             queues.put(gameName, new GameQueue(gameName));
         }
     }
-
     public GameQueue getQueue(String gameName) {
         return queues.get(gameName);
     }
-
-    public void removePlayerFromAllQueues(Player player) {
-        for (GameQueue queue : queues.values()) {
-            if(queue.containsPlayer(player))
-            {
-                queue.removePlayer(player);
-            }
-        }
-    }
-
 }

@@ -9,14 +9,7 @@ import org.bukkit.entity.Player;
 
 public class PlayerQuitListener implements Listener {
     private final QueueManager queueManager;
-
     public PlayerQuitListener(QueueManager queueManager) {
         this.queueManager = queueManager;
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        queueManager.removePlayerFromAllQueues(player);
     }
 }
