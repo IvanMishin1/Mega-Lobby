@@ -86,11 +86,15 @@ public class QueueManager implements CommandExecutor {
                     commandSender.sendMessage("Invalid action");
                     break;
             }
-        } else if (args.length == 1) {
+        }
+        if (args.length == 1) {
             switch (action) {
                 case "listqueues":
                     String queuesMessage = String.join(", ", queues.keySet());
                     commandSender.sendMessage("Queues: " + queuesMessage);
+                    break;
+                case "somecommand":
+                    commandSender.sendMessage("somecommand");
                     break;
                 default:
                     commandSender.sendMessage("Invalid command");

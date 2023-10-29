@@ -1,5 +1,7 @@
 package com.megaearth.mpvp;
 
+import com.megaearth.mpvp.listeners.GUIMetaListener;
+import com.megaearth.mpvp.listeners.PlayerLeaveListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MPVP extends JavaPlugin {
@@ -13,6 +15,7 @@ public final class MPVP extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayGUI(queueManager), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(queueManager), this);
 
         getCommand("queue").setTabCompleter(new QueueTabCompleter(queueManager));
 

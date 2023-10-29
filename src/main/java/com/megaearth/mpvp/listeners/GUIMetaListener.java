@@ -1,4 +1,5 @@
-package com.megaearth.mpvp;
+package com.megaearth.mpvp.listeners;
+import com.megaearth.mpvp.MPVP;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
