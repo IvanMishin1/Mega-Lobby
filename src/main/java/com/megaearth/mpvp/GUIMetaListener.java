@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import java.util.Objects;
-import com.megaearth.mpvp.queue.*;
+
 public class GUIMetaListener implements Listener {
 
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);

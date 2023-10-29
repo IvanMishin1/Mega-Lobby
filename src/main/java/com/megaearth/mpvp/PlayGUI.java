@@ -1,4 +1,4 @@
-package com.megaearth.mpvp.commands;
+package com.megaearth.mpvp;
 import com.megaearth.mpvp.MPVP;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 
 public class PlayGUI implements CommandExecutor {
+    private final QueueManager queueManager;
 
+    public PlayGUI(QueueManager queueManager) {
+        this.queueManager = queueManager;
+    }
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
 
     @Override
