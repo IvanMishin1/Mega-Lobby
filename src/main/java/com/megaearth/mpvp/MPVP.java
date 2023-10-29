@@ -9,7 +9,7 @@ public final class MPVP extends JavaPlugin {
     public void onEnable() {
         queueManager = new QueueManager();
         getCommand("queue").setExecutor(queueManager);
-        getCommand("play").setExecutor(new PlayGUI(queueManager));
+        getCommand("gui").setExecutor(new PlayGUI(queueManager));
 
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayGUI(queueManager), this);

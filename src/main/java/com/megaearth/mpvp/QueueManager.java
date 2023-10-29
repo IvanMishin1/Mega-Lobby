@@ -75,7 +75,12 @@ public class QueueManager implements CommandExecutor {
                     }
                     break;
                 case "list":
-                    commandSender.sendMessage("Players in queue for " + gameName + ": " + queue.getPlayers());
+                    List<String> playerNames = new ArrayList<>();
+                    for (Player player : queue.getPlayers()) {
+                        playerNames.add(player.getName());
+                    }
+                    String playersMessage = String.join(", ", playerNames);
+                    commandSender.sendMessage("Players in queue for " + gameName + ": " + playersMessage);
                     break;
                 default:
                     commandSender.sendMessage("Invalid action");

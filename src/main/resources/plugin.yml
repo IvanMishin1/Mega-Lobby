@@ -3,10 +3,10 @@ version: '${project.version}'
 main: com.megaearth.mpvp.MPVP
 api-version: '1.20'
 commands:
-        play:
+        gui:
             description: A command to open the GUI
             usage: /<command>
-            aliases: []
+            aliases: [play, p]
             default: true
             permission-message: You don't have permission to use this command.
             executor: com.megaearth.mpvp.PlayGUI

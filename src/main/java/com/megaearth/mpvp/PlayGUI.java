@@ -24,7 +24,7 @@ public class PlayGUI implements CommandExecutor, Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("play")) {
+        if (command.getName().equalsIgnoreCase("gui")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage("You must be a player to use this command!");
                 return true;
