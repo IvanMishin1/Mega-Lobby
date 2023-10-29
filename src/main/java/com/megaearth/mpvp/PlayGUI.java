@@ -1,16 +1,20 @@
 package com.megaearth.mpvp;
-import com.megaearth.mpvp.MPVP;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
+import org.bukkit.entity.Player.*;
 
-public class PlayGUI implements CommandExecutor {
+public class PlayGUI implements CommandExecutor, Listener {
     private final QueueManager queueManager;
 
     public PlayGUI(QueueManager queueManager) {
@@ -35,5 +39,31 @@ public class PlayGUI implements CommandExecutor {
             player.setMetadata("OpenedMenu", new FixedMetadataValue(plugin, true));
         }
         return true;
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        if (event.getInventory().getHolder() instanceof Player) {
+            Player player = (Player) event.getInventory().getHolder();
+            String clicked = event.getCurrentItem().getType().toString();
+            switch (clicked) {
+                case "DIAMOND_SWORD":
+                    player.performCommand("queue join Game1");
+                    player.closeInventory();
+                    break;
+                case "TNT":
+                    player.performCommand("queue join Game2");
+                    player.closeInventory();
+                    break;
+                case "GRASS_BLOCK":
+                    player.performCommand("queue join Game3");
+                    player.closeInventory();
+                    break;
+                case "RED_BED":
+                    player.performCommand("queue join Game4");
+                    player.closeInventory();
+                    break;
+            }
+        }
     }
 }

@@ -4,11 +4,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.Material;
-import java.util.Objects;
 
 public class GUIMetaListener implements Listener {
 
+    // This class is used to prevent players from moving items in the GUI. It is not responsible for listening to what items are clicked.
+    // That is the job of the class that implements the GUI.
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
 
     @EventHandler
@@ -17,9 +17,6 @@ public class GUIMetaListener implements Listener {
             Player player = (Player) event.getInventory().getHolder();
             if (player.hasMetadata("OpenedMenu")) {
                 event.setCancelled(true);
-                if (Objects.requireNonNull(event.getCurrentItem()).getType().equals(Material.DIAMOND_SWORD)) {
-                    event.getWhoClicked().closeInventory();
-                }
             }
         }
     }

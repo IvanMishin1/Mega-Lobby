@@ -12,6 +12,7 @@ public final class MPVP extends JavaPlugin {
         getCommand("play").setExecutor(new PlayGUI(queueManager));
 
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayGUI(queueManager), this);
 
         getCommand("queue").setTabCompleter(new QueueTabCompleter(queueManager));
 
