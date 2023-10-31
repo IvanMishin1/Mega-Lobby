@@ -44,12 +44,12 @@ public class QueueManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-        String action = args[0];
         if (args.length == 0) {
             commandSender.sendMessage("Invalid command");
             return true;
         }
-        if (args.length > 1) {
+        String action = args[0];
+        if (args.length > 1 && (action.equalsIgnoreCase("join") || action.equalsIgnoreCase("leave") || action.equalsIgnoreCase("list"))) {
             String gameName = args[1];
             GameQueue queue = getQueue(gameName);
 
@@ -84,7 +84,7 @@ public class QueueManager implements CommandExecutor {
                     } else {
                         commandSender.sendMessage("Only players can leave queues");
                     }
-                    break;
+                    return true;
                 case "list":
                     List<String> playerNames = new ArrayList<>();
                     for (Player player : queue.getPlayers()) {
@@ -92,10 +92,10 @@ public class QueueManager implements CommandExecutor {
                     }
                     String playersMessage = String.join(", ", playerNames);
                     commandSender.sendMessage("Players in queue for " + gameName + ": " + playersMessage);
-                    break;
+                    return true;
                 default:
-                    commandSender.sendMessage("Invalid action");
-                    break;
+                    commandSender.sendMessage("Invalid command");
+                    return true;
             }
         }
         if (args.length == 1) {
@@ -103,16 +103,16 @@ public class QueueManager implements CommandExecutor {
                 case "listqueues":
                     String queuesMessage = String.join(", ", queues.keySet());
                     commandSender.sendMessage("Queues: " + queuesMessage);
-                    break;
+                    return true;
                 case "somecommand":
                     commandSender.sendMessage("somecommand");
-                    break;
+                    return true;
                 default:
                     commandSender.sendMessage("Invalid command");
-                    break;
+                    return true;
             }
         }
-
+        commandSender.sendMessage("Invalid command");
         return true;
     }
 
