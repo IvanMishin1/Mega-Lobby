@@ -20,6 +20,14 @@ public class QueueManager implements CommandExecutor {
         }
     }
 
+    public void deleteQueue(String gameName) {
+        queues.remove(gameName);
+    }
+
+    public void deleteAllQueues() {
+        queues.clear();
+    }
+
     public GameQueue getQueue(String gameName) {
         return queues.get(gameName);
     }

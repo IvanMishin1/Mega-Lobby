@@ -4,8 +4,6 @@ import com.megaearth.mpvp.QueueManager;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-
 
 public class PlayerLeaveListener implements Listener {
     private final QueueManager queueManager;
