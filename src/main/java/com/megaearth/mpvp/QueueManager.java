@@ -45,7 +45,10 @@ public class QueueManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         String action = args[0];
-
+        if (args.length == 0) {
+            commandSender.sendMessage("Invalid command");
+            return true;
+        }
         if (args.length > 1) {
             String gameName = args[1];
             GameQueue queue = getQueue(gameName);
