@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
+import static org.bukkit.Bukkit.getLogger;
 
 public class IconMenu implements Listener {
 
@@ -28,13 +29,23 @@ public class IconMenu implements Listener {
         this.name = name;
         this.size = size;
         this.handler = handler;
-        this.plugin = plugin;
+        this.plugin = (MPVP) plugin;
         this.optionNames = new String[size];
         this.optionIcons = new ItemStack[size];
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     public IconMenu setOption(int position, ItemStack icon, String name, String... info) {
+        if (position >= size) {
+            if (position >= 54) {
+                // Discard the option and log an error
+                getLogger().warning("Error: Option position " + position + " is out of bounds of a double chest.");
+                return this;
+            }
+            size = ((position / 9) + 1) * 9; // Increase the size of the menu to the next multiple of 9 greater than position
+            optionNames = Arrays.copyOf(optionNames, size); // Resize the optionNames array
+            optionIcons = Arrays.copyOf(optionIcons, size); // Resize the optionIcons array
+        }
         optionNames[position] = name;
         optionIcons[position] = setItemNameAndLore(icon, name, info);
         return this;
