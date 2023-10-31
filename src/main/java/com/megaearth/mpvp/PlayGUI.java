@@ -6,18 +6,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import com.megaearth.mpvp.IconMenu;
+import com.megaearth.mpvp.ChestGUI;
 
 public class PlayGUI implements CommandExecutor {
     MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
     private final QueueManager queueManager;
-    private final IconMenu menu;
+    private final ChestGUI menu;
 
     public PlayGUI(QueueManager queueManager, MPVP plugin) {
         this.queueManager = queueManager;
-        this.menu = new IconMenu("Game Selection", 9, new IconMenu.OptionClickEventHandler() {
+        this.menu = new ChestGUI("Game Selection", 9, new ChestGUI.OptionClickEventHandler() {
             @Override
-            public void onOptionClick(IconMenu.OptionClickEvent event) {
+            public void onOptionClick(ChestGUI.OptionClickEvent event) {
                 Player player = event.getPlayer();
                 String clicked = event.getName();
                 switch (clicked) {

@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import static org.bukkit.Bukkit.getLogger;
 
-public class IconMenu implements Listener {
+public class ChestGUI implements Listener {
 
     private String name;
     private int size;
@@ -25,7 +25,7 @@ public class IconMenu implements Listener {
     private String[] optionNames;
     private ItemStack[] optionIcons;
 
-    public IconMenu(String name, int size, OptionClickEventHandler handler, Plugin plugin) {
+    public ChestGUI(String name, int size, OptionClickEventHandler handler, Plugin plugin) {
         this.name = name;
         this.size = size;
         this.handler = handler;
@@ -35,7 +35,7 @@ public class IconMenu implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public IconMenu setOption(int position, ItemStack icon, String name, String... info) {
+    public ChestGUI setOption(int position, ItemStack icon, String name, String... info) {
         if (position >= size) {
             if (position >= 54) {
                 // Discard the option and log an error
