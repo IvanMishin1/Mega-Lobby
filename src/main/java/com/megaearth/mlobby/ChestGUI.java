@@ -1,4 +1,4 @@
-package com.megaearth.mpvp;
+package com.megaearth.mlobby;
 
 import java.util.Arrays;
 
@@ -29,7 +29,7 @@ public class ChestGUI implements Listener {
         this.name = name;
         this.size = size;
         this.handler = handler;
-        this.plugin = (MPVP) plugin;
+        this.plugin = (mlobby) plugin;
         this.optionNames = new String[size];
         this.optionIcons = new ItemStack[size];
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

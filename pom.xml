@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mega-earth</groupId>
-    <artifactId>MPVP</artifactId>
+    <artifactId>Mega-Lobby</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

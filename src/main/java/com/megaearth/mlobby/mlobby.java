@@ -1,13 +1,10 @@
-package com.megaearth.mpvp;
+package com.megaearth.mlobby;
 
-import com.megaearth.mpvp.listeners.GUIMetaListener;
-import com.megaearth.mpvp.listeners.PlayerLeaveListener;
-import org.bukkit.event.Listener;
+import com.megaearth.mlobby.listeners.GUIMetaListener;
+import com.megaearth.mlobby.listeners.PlayerLeaveListener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
 
-public final class MPVP extends JavaPlugin {
+public final class mlobby extends JavaPlugin {
     private QueueManager queueManager;
 
     @Override

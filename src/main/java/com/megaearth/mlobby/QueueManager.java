@@ -1,4 +1,4 @@
-package com.megaearth.mpvp;
+package com.megaearth.mlobby;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

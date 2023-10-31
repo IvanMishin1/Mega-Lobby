@@ -1,4 +1,4 @@
-package com.megaearth.mpvp;
+package com.megaearth.mlobby;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,14 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import com.megaearth.mpvp.ChestGUI;
 
 public class PlayGUI implements CommandExecutor {
-    MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
+    mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
     private final QueueManager queueManager;
     private final ChestGUI menu;
 
-    public PlayGUI(QueueManager queueManager, MPVP plugin) {
+    public PlayGUI(QueueManager queueManager, mlobby plugin) {
         this.queueManager = queueManager;
         this.menu = new ChestGUI("Game Selection", 9, new ChestGUI.OptionClickEventHandler() {
             @Override

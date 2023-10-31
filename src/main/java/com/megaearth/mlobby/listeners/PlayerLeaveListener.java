@@ -1,6 +1,6 @@
-package com.megaearth.mpvp.listeners;
+package com.megaearth.mlobby.listeners;
 
-import com.megaearth.mpvp.QueueManager;
+import com.megaearth.mlobby.QueueManager;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;

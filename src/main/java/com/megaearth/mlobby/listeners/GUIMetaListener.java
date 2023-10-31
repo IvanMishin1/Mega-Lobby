@@ -1,5 +1,5 @@
-package com.megaearth.mpvp.listeners;
-import com.megaearth.mpvp.MPVP;
+package com.megaearth.mlobby.listeners;
+import com.megaearth.mlobby.mlobby;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -10,7 +10,7 @@ public class GUIMetaListener implements Listener {
 
     // This class is used to prevent players from moving items in the GUI. It is not responsible for listening to what items are clicked.
     // That is the job of the class that implements the GUI.
-    MPVP plugin = (MPVP) MPVP.getPlugin(MPVP.class);
+    mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
