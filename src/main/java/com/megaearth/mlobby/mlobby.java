@@ -10,17 +10,21 @@ public final class mlobby extends JavaPlugin {
     @Override
     public void onEnable() {
         queueManager = new QueueManager();
+
+        getLogger().info("Registering commands");
         getCommand("queue").setExecutor(queueManager);
         getCommand("gui").setExecutor(new PlayGUI(queueManager, this));
 
+        getLogger().info("Registering listeners");
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(queueManager), this);
 
+        getLogger().info("Enabling tab completion");
         getCommand("queue").setTabCompleter(new QueueTabCompleter(queueManager));
 
-
-        queueManager.createQueue("Game1");
-        queueManager.createQueue("Game2");
+        getLogger().info("Creating queues");
+        queueManager.createQueue("Mega-Earth","earth");
+        queueManager.createQueue("Mega-PVP","pvp");
 
         getLogger().info("MPVP has been enabled!");
     }

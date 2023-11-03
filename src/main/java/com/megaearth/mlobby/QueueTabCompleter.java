@@ -31,7 +31,7 @@ public class QueueTabCompleter implements TabCompleter {
             if (args.length == 2 && args[0].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("list")) {
                 List<String> gameNames = new ArrayList<>();
                 for (GameQueue gameQueue : queueManager.getAllQueues()) {
-                    gameNames.add(gameQueue.getGameName());
+                    gameNames.add(gameQueue.getServerName());
                 }
                 return gameNames;
             }

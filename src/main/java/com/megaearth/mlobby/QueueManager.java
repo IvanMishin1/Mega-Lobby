@@ -4,22 +4,26 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 import java.util.ArrayList;
 import java.util.*;
 
 public class QueueManager implements CommandExecutor {
     private final Map<String, GameQueue> queues;
 
+    /* -------------------------------------------------------------------------- */
+    /*                        Queue Management Methods                            */
+    /* -------------------------------------------------------------------------- */
+
     public QueueManager() {
         this.queues = new HashMap<>();
     }
 
-    public void createQueue(String gameName) {
+    public void createQueue(String gameName, String serverName) {
         if (!queues.containsKey(gameName)) {
-            queues.put(gameName, new GameQueue(gameName));
+            queues.put(serverName, new GameQueue(gameName, serverName));
         }
     }
-
     public void deleteQueue(String gameName) {
         queues.remove(gameName);
     }
@@ -41,6 +45,10 @@ public class QueueManager implements CommandExecutor {
     public Collection<GameQueue> getAllQueues() {
         return queues.values();
     }
+
+    /* -------------------------------------------------------------------------- */
+    /*                             Queue Command Stuff                            */
+    /* -------------------------------------------------------------------------- */
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
@@ -112,18 +120,22 @@ public class QueueManager implements CommandExecutor {
                     return true;
             }
         }
-        commandSender.sendMessage("Invalid command");
         return true;
     }
-
 }
+
+/* -------------------------------------------------------------------------- */
+/*                               Queue Class Stuff                            */
+/* -------------------------------------------------------------------------- */
 
 class GameQueue {
     private final String gameName;
+    private final String serverName;
     private final Queue<Player> queue;
 
-    public GameQueue(String gameName) {
+    public GameQueue(String gameName, String serverName) {
         this.gameName = gameName;
+        this.serverName = serverName;
         this.queue = new LinkedList<>();
     }
 
@@ -142,4 +154,8 @@ class GameQueue {
     public String getGameName() {
         return gameName;
     }
+    public String getServerName() {
+        return serverName;
+    }
+
 }
