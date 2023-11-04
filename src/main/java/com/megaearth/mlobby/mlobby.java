@@ -22,13 +22,21 @@ public final class mlobby extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(gameManager), this);
 
         getLogger().info("Enabling tab completion");
-        Objects.requireNonNull(getCommand("queue")).setTabCompleter(new QueueTabCompleter(gameManager));
+        Objects.requireNonNull(getCommand("queue")).setTabCompleter(new TabCompleter(gameManager));
 
         getLogger().info("Creating queues");
-        gameManager.createQueue("Mega-Earth","earth");
-        gameManager.createQueue("Mega-PVP","pvp");
+        this.saveDefaultConfig();
+        for(String gameKey : this.getConfig().getConfigurationSection("games").getKeys(false)) {
+            String gameName = this.getConfig().getString("games." + gameKey + ".game-name");
+            String serverName = gameKey;
+            int maxPlayers = this.getConfig().getInt("games." + gameKey + ".max-players");
+            String guiItem = this.getConfig().getString("games." + gameKey + ".gui-item");
+            getLogger().info("- Creating queue for " + gameName + " with server name " + serverName + " and max players " + maxPlayers + " and gui item " + guiItem);
+            gameManager.createGame(gameName, serverName, maxPlayers, guiItem);
+        }
 
-        getLogger().info("MPVP has been enabled!");
+        getLogger().info("Mega-Lobby has been enabled!");
+
     }
     public GameManager getgameManager() {
         return gameManager;
@@ -38,6 +46,6 @@ public final class mlobby extends JavaPlugin {
     public void onDisable() {
         gameManager.deleteAllGames();
         getLogger().info("All queues have been cleared!");
-        getLogger().info("MPVP has been disabled!");
+        getLogger().info("Mega-Lobby has been disabled!");
     }
 }

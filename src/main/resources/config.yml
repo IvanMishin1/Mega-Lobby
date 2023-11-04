@@ -1,0 +1,13 @@
+games:
+  earth:
+    game-name: Mega-Earth
+    max-players: 100
+    gui-item: GRASS_BLOCK
+  pvp:
+    game-name: Mega-PVP
+    max-players: 100
+    gui-item: DIAMOND_SWORD
+  test:
+    game-name: Mega-Test
+    max-players: 15
+    gui-item: DIAMOND

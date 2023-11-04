@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
+
 public class PlayGUI implements CommandExecutor {
     mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
     private final GameManager gameManager;
@@ -35,7 +37,6 @@ public class PlayGUI implements CommandExecutor {
         // Set menu options
         menu.setOption(0, new ItemStack(Material.GRASS_BLOCK), "Mega-Earth");
         menu.setOption(1, new ItemStack(Material.DIAMOND_SWORD), "Mega-PVP");
-
     }
 
     @Override

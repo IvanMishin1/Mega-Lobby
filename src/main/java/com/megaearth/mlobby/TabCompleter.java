@@ -2,16 +2,15 @@ package com.megaearth.mlobby;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueueTabCompleter implements TabCompleter {
+public class TabCompleter implements org.bukkit.command.TabCompleter {
     private final GameManager gameManager;
 
-    public QueueTabCompleter(GameManager queueManager) {
+    public TabCompleter(GameManager queueManager) {
         this.gameManager = queueManager;
     }
 

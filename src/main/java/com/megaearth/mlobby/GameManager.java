@@ -18,9 +18,9 @@ public class GameManager implements CommandExecutor {
         this.queues = new HashMap<>();
     }
 
-    public void createQueue(String gameName, String serverName) {
+    public void createGame(String gameName, String serverName, int maxPlayers, String guiItem) {
         if (!queues.containsKey(gameName)) {
-            queues.put(serverName, new Game(gameName, serverName));
+            queues.put(serverName, new Game(gameName, serverName, maxPlayers, guiItem));
         }
     }
     public void deleteQueue(String gameName) {
@@ -136,11 +136,15 @@ public class GameManager implements CommandExecutor {
 class Game {
     private final String gameName;
     private final String serverName;
+    private final int maxPlayers;
+    private final String guiItem;
     private final Queue<Player> queue;
 
-    public Game(String gameName, String serverName) {
+    public Game(String gameName, String serverName, int maxPlayers, String guiItem) {
         this.gameName = gameName;
         this.serverName = serverName;
+        this.maxPlayers = maxPlayers;
+        this.guiItem = guiItem;
         this.queue = new LinkedList<>();
     }
 
@@ -152,6 +156,9 @@ class Game {
         queue.remove(player);
     }
 
+    public String getGuiItem() {
+        return guiItem;
+    }
     public List<Player> getPlayers() {
         return new ArrayList<>(queue);
     }
@@ -167,5 +174,4 @@ class Game {
         assert queue.peek() != null;
         return queue.peek().getName();
     }
-
 }
