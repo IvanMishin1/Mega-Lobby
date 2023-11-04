@@ -9,11 +9,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlayGUI implements CommandExecutor {
     mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
-    private final QueueManager queueManager;
+    private final GameManager gameManager;
     private final ChestGUI menu;
 
-    public PlayGUI(QueueManager queueManager, mlobby plugin) {
-        this.queueManager = queueManager;
+    public PlayGUI(GameManager queueManager, mlobby plugin) {
+        this.gameManager = queueManager;
         this.menu = new ChestGUI("Game Selection", 9, new ChestGUI.OptionClickEventHandler() {
             @Override
             public void onOptionClick(ChestGUI.OptionClickEvent event) {

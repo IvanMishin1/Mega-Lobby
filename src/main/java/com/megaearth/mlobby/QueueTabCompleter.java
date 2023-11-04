@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueueTabCompleter implements TabCompleter {
-    private final QueueManager queueManager;
+    private final GameManager gameManager;
 
-    public QueueTabCompleter(QueueManager queueManager) {
-        this.queueManager = queueManager;
+    public QueueTabCompleter(GameManager queueManager) {
+        this.gameManager = queueManager;
     }
 
     @Override
@@ -30,8 +30,8 @@ public class QueueTabCompleter implements TabCompleter {
             }
             if (args.length == 2 && args[0].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("list")) {
                 List<String> gameNames = new ArrayList<>();
-                for (GameQueue gameQueue : queueManager.getAllQueues()) {
-                    gameNames.add(gameQueue.getServerName());
+                for (Game game : gameManager.getAllGames()) {
+                    gameNames.add(game.getServerName());
                 }
                 return gameNames;
             }
