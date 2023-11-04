@@ -7,13 +7,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
+
 public class PlayGUI implements CommandExecutor {
     mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
-    private final QueueManager queueManager;
+    private final GameManager gameManager;
     private final ChestGUI menu;
 
-    public PlayGUI(QueueManager queueManager, mlobby plugin) {
-        this.queueManager = queueManager;
+    public PlayGUI(GameManager queueManager, mlobby plugin) {
+        this.gameManager = queueManager;
         this.menu = new ChestGUI("Game Selection", 9, new ChestGUI.OptionClickEventHandler() {
             @Override
             public void onOptionClick(ChestGUI.OptionClickEvent event) {
@@ -35,7 +37,6 @@ public class PlayGUI implements CommandExecutor {
         // Set menu options
         menu.setOption(0, new ItemStack(Material.GRASS_BLOCK), "Mega-Earth");
         menu.setOption(1, new ItemStack(Material.DIAMOND_SWORD), "Mega-PVP");
-
     }
 
     @Override

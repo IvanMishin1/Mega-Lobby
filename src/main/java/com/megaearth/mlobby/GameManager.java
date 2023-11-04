@@ -7,41 +7,41 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.*;
 
-public class QueueManager implements CommandExecutor {
-    private final Map<String, GameQueue> queues;
+public class GameManager implements CommandExecutor {
+    private final Map<String, Game> queues;
 
     /* -------------------------------------------------------------------------- */
     /*                        Queue Management Methods                            */
     /* -------------------------------------------------------------------------- */
 
-    public QueueManager() {
+    public GameManager() {
         this.queues = new HashMap<>();
     }
 
-    public void createQueue(String gameName, String serverName) {
+    public void createGame(String gameName, String serverName, int maxPlayers, String guiItem) {
         if (!queues.containsKey(gameName)) {
-            queues.put(serverName, new GameQueue(gameName, serverName));
+            queues.put(serverName, new Game(gameName, serverName, maxPlayers, guiItem));
         }
     }
     public void deleteQueue(String gameName) {
         queues.remove(gameName);
     }
 
-    public void deleteAllQueues() {
+    public void deleteAllGames() {
         queues.clear();
     }
 
-    public GameQueue getQueue(String gameName) {
+    public Game getQueue(String gameName) {
         return queues.get(gameName);
     }
 
     public void removePlayerFromAllQueues(Player player) {
-        for (GameQueue queue : queues.values()) {
+        for (Game queue : queues.values()) {
             queue.removePlayer(player);
         }
     }
 
-    public Collection<GameQueue> getAllQueues() {
+    public Collection<Game> getAllGames() {
         return queues.values();
     }
 
@@ -58,7 +58,7 @@ public class QueueManager implements CommandExecutor {
         String action = args[0];
         if (args.length > 1 && (action.equalsIgnoreCase("join") || action.equalsIgnoreCase("leave") || action.equalsIgnoreCase("list"))) {
             String gameName = args[1];
-            GameQueue queue = getQueue(gameName);
+            Game queue = getQueue(gameName);
 
             if (queue == null) {
                 commandSender.sendMessage("That game does not exist");
@@ -133,14 +133,18 @@ public class QueueManager implements CommandExecutor {
 /*                               Queue Class Stuff                            */
 /* -------------------------------------------------------------------------- */
 
-class GameQueue {
+class Game {
     private final String gameName;
     private final String serverName;
+    private final int maxPlayers;
+    private final String guiItem;
     private final Queue<Player> queue;
 
-    public GameQueue(String gameName, String serverName) {
+    public Game(String gameName, String serverName, int maxPlayers, String guiItem) {
         this.gameName = gameName;
         this.serverName = serverName;
+        this.maxPlayers = maxPlayers;
+        this.guiItem = guiItem;
         this.queue = new LinkedList<>();
     }
 
@@ -152,6 +156,9 @@ class GameQueue {
         queue.remove(player);
     }
 
+    public String getGuiItem() {
+        return guiItem;
+    }
     public List<Player> getPlayers() {
         return new ArrayList<>(queue);
     }
@@ -167,5 +174,4 @@ class GameQueue {
         assert queue.peek() != null;
         return queue.peek().getName();
     }
-
 }
