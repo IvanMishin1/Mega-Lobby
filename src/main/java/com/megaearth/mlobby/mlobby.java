@@ -4,6 +4,8 @@ import com.megaearth.mlobby.listeners.GUIMetaListener;
 import com.megaearth.mlobby.listeners.PlayerLeaveListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
 public final class mlobby extends JavaPlugin {
     private QueueManager queueManager;
 
@@ -12,15 +14,15 @@ public final class mlobby extends JavaPlugin {
         queueManager = new QueueManager();
 
         getLogger().info("Registering commands");
-        getCommand("queue").setExecutor(queueManager);
-        getCommand("gui").setExecutor(new PlayGUI(queueManager, this));
+        Objects.requireNonNull(getCommand("queue")).setExecutor(queueManager);
+        Objects.requireNonNull(getCommand("gui")).setExecutor(new PlayGUI(queueManager, this));
 
         getLogger().info("Registering listeners");
         this.getServer().getPluginManager().registerEvents(new GUIMetaListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(queueManager), this);
 
         getLogger().info("Enabling tab completion");
-        getCommand("queue").setTabCompleter(new QueueTabCompleter(queueManager));
+        Objects.requireNonNull(getCommand("queue")).setTabCompleter(new QueueTabCompleter(queueManager));
 
         getLogger().info("Creating queues");
         queueManager.createQueue("Mega-Earth","earth");

@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.Bukkit;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -65,7 +64,7 @@ public class QueueManager implements CommandExecutor {
                 commandSender.sendMessage("That game does not exist");
                 return true;
             }
-
+            // For commands with 2 arguments
             switch (action) {
                 case "join":
                     if (commandSender instanceof Player) {
@@ -94,6 +93,10 @@ public class QueueManager implements CommandExecutor {
                     }
                     return true;
                 case "list":
+                    if (queue.getPlayers().isEmpty()) {
+                        commandSender.sendMessage("There are no players in the queue for " + gameName);
+                        return true;
+                    }
                     List<String> playerNames = new ArrayList<>();
                     for (Player player : queue.getPlayers()) {
                         playerNames.add(player.getName());
@@ -107,13 +110,15 @@ public class QueueManager implements CommandExecutor {
             }
         }
         if (args.length == 1) {
+            // For commands with 1 argument
             switch (action) {
                 case "listqueues":
+                    if (queues.isEmpty()) {
+                        commandSender.sendMessage("There are no queues");
+                        return true;
+                    }
                     String queuesMessage = String.join(", ", queues.keySet());
                     commandSender.sendMessage("Queues: " + queuesMessage);
-                    return true;
-                case "somecommand":
-                    commandSender.sendMessage("somecommand");
                     return true;
                 default:
                     commandSender.sendMessage("Invalid command");
@@ -156,6 +161,11 @@ class GameQueue {
     }
     public String getServerName() {
         return serverName;
+    }
+
+    public String getFirstPlayerName() {
+        assert queue.peek() != null;
+        return queue.peek().getName();
     }
 
 }
