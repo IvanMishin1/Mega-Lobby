@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class TabCompleter implements org.bukkit.command.TabCompleter {
     private final GameManager gameManager;
@@ -29,7 +30,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             }
             if (args.length == 2 && args[0].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("list")) {
                 List<String> gameNames = new ArrayList<>();
-                for (Game game : gameManager.getAllGames()) {
+                for (GameManager.Game game : gameManager.getAllGames()) {
                     gameNames.add(game.getServerName());
                 }
                 return gameNames;

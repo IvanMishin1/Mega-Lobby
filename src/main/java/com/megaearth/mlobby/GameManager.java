@@ -7,11 +7,13 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.*;
 
+import static org.bukkit.Bukkit.getLogger;
+
 public class GameManager implements CommandExecutor {
     private final Map<String, Game> queues;
 
     /* -------------------------------------------------------------------------- */
-    /*                        Queue Management Methods                            */
+    /*                        Game Management Methods                            */
     /* -------------------------------------------------------------------------- */
 
     public GameManager() {
@@ -23,6 +25,7 @@ public class GameManager implements CommandExecutor {
             queues.put(serverName, new Game(gameName, serverName, maxPlayers, guiItem));
         }
     }
+
     public void deleteQueue(String gameName) {
         queues.remove(gameName);
     }
@@ -127,51 +130,71 @@ public class GameManager implements CommandExecutor {
         }
         return true;
     }
-}
 
-/* -------------------------------------------------------------------------- */
-/*                               Queue Class Stuff                            */
-/* -------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------- */
+    /*                               Matchmaking stuff                            */
+    /* -------------------------------------------------------------------------- */
 
-class Game {
-    private final String gameName;
-    private final String serverName;
-    private final int maxPlayers;
-    private final String guiItem;
-    private final Queue<Player> queue;
-
-    public Game(String gameName, String serverName, int maxPlayers, String guiItem) {
-        this.gameName = gameName;
-        this.serverName = serverName;
-        this.maxPlayers = maxPlayers;
-        this.guiItem = guiItem;
-        this.queue = new LinkedList<>();
+    public void Matchmake() {
+        getLogger().info("Matchmaking...");
+        for (Game queue : queues.values()) {
+            if (queue.getPlayers().size() >= queue.maxPlayers) {
+                List<Player> players = queue.getPlayers();
+                for (Player player : players) {
+                    player.sendMessage("You have been matched with " + queue.getFirstPlayerName());
+                }
+                queue.getPlayers().clear();
+            }
+        }
     }
 
-    public void addPlayer(Player player) {
-        queue.add(player);
-    }
+    /* -------------------------------------------------------------------------- */
+    /*                               Game Class Stuff                            */
+    /* -------------------------------------------------------------------------- */
 
-    public void removePlayer(Player player) {
-        queue.remove(player);
-    }
+    class Game {
+        private final String gameName;
+        private final String serverName;
+        private final int maxPlayers;
+        private final String guiItem;
+        private final Queue<Player> queue;
 
-    public String getGuiItem() {
-        return guiItem;
-    }
-    public List<Player> getPlayers() {
-        return new ArrayList<>(queue);
-    }
+        public Game(String gameName, String serverName, int maxPlayers, String guiItem) {
+            this.gameName = gameName;
+            this.serverName = serverName;
+            this.maxPlayers = maxPlayers;
+            this.guiItem = guiItem;
+            this.queue = new LinkedList<>();
+        }
 
-    public String getGameName() {
-        return gameName;
-    }
-    public String getServerName() {
-        return serverName;
-    }
+        public void addPlayer(Player player) {
+            queue.add(player);
+            Matchmake();
+        }
 
-    public String getFirstPlayerName() {
-        assert queue.peek() != null;
-        return queue.peek().getName();
+        public void removePlayer(Player player) {
+            queue.remove(player);
+        }
+
+        public String getGuiItem() {
+            return guiItem;
+        }
+
+        public List<Player> getPlayers() {
+            return new ArrayList<>(queue);
+        }
+
+        public String getGameName() {
+            return gameName;
+        }
+
+        public String getServerName() {
+            return serverName;
+        }
+
+        public String getFirstPlayerName() {
+            assert queue.peek() != null;
+            return queue.peek().getName();
+        }
     }
 }

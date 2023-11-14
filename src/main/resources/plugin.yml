@@ -9,7 +9,6 @@ commands:
             aliases: [play, p]
             default: true
             permission-message: You don't have permission to use this command.
-            executor: com.megaearth.mpvp.PlayGUI
         queue:
             description: A command to join/leave the queue
             usage: /<command>
@@ -17,4 +16,10 @@ commands:
             default: true
             args: [join, leave, list, listqueues]
             permission-message: You don't have permission to use this command.
-            executor: com.megaearth.mpvp.commands.QueueManager
+        debug:
+            description: A command to debug the plugin
+            usage: /<command>
+            aliases: [d]
+            default: true
+            args: []
+            permission-message: You don't have permission to use this command.

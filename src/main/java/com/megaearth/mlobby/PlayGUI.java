@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
+import static org.bukkit.Bukkit.getLogger;
+
 public class PlayGUI implements CommandExecutor {
     mlobby plugin = (mlobby) mlobby.getPlugin(mlobby.class);
     private final GameManager gameManager;
@@ -49,6 +51,11 @@ public class PlayGUI implements CommandExecutor {
             Player player = (Player) sender;
             menu.open(player);
         }
+        if (command.getName().equalsIgnoreCase("debug")) {
+            getLogger().info("Running Matchmake()");
+            gameManager.Matchmake();
+        }
+
         return true;
     }
 }
